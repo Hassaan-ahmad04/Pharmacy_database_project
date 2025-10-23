@@ -1,48 +1,38 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include 'db_connect.php';
-?>
 
-<?php
-include 'db_connect.php';
+$id = $_GET['id'] ?? null;
 $message = "";
 $message_color = "";
 
-// Get medicine ID from URL
-$id = $_GET['id'] ?? '';
-
 if (!$id) {
-    die("Invalid medicine ID!");
+    die("Invalid Medicine ID");
 }
 
-// Fetch current medicine data
-$result = pg_query($conn, "SELECT * FROM medicine WHERE medicine_id=$id");
-$medicine = pg_fetch_assoc($result);
+// Fetch current data
+$res = mysqli_query($conn, "SELECT * FROM medicine WHERE medicine_id=$id");
+$medicine = mysqli_fetch_assoc($res);
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $medicine_name = $_POST['medicine_name'] ?? "";
-    $price = $_POST['price'] ?? "";
-    $quantity = $_POST['quantity'] ?? "";
+    $medicine_name = $_POST['medicine_name'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
 
-    if ($medicine_name && $price && $quantity) {
-        $update = "UPDATE medicine 
-                   SET medicine_name='$medicine_name', price=$price, quantity=$quantity 
-                   WHERE medicine_id=$id";
-        $res = pg_query($conn, $update);
-        if ($res) {
-            header("Location: add_medicine.php"); // Redirect back
-            exit();
-        } else {
-            $message = "❌ Error: " . pg_last_error($conn);
-            $message_color = "red";
-        }
+    $query = "UPDATE medicine SET medicine_name='$medicine_name', price=$price, quantity=$quantity 
+              WHERE medicine_id=$id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $message = "✅ Medicine updated successfully!";
+        $message_color = "green";
     } else {
-        $message = "⚠️ All fields are required!";
-        $message_color = "orange";
+        $message = "❌ Error: " . mysqli_error($conn);
+        $message_color = "red";
     }
+
+    // Refresh data
+    $res = mysqli_query($conn, "SELECT * FROM medicine WHERE medicine_id=$id");
+    $medicine = mysqli_fetch_assoc($res);
 }
 ?>
 
@@ -53,31 +43,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Update Medicine</h2>
+<h2>Update Medicine</h2>
 
-    <?php if ($message) echo "<p style='color:$message_color;'>$message</p>"; ?>
+<?php if(!empty($message)) echo "<p style='color:$message_color;'>$message</p>"; ?>
 
-    <form action="" method="POST">
-        <div>
-            <label>Medicine Name:</label>
-            <input type="text" name="medicine_name" value="<?php echo $medicine['medicine_name']; ?>" required>
-        </div>
+<form method="POST">
+    <div class="form-group">
+        <label>Medicine Name:</label>
+        <input type="text" name="medicine_name" value="<?php echo $medicine['medicine_name']; ?>" required>
+    </div>
 
-        <div>
-            <label>Price:</label>
-            <input type="number" name="price" value="<?php echo $medicine['price']; ?>" required>
-        </div>
+    <div class="form-group">
+        <label>Price:</label>
+        <input type="number" name="price" value="<?php echo $medicine['price']; ?>" required>
+    </div>
 
-        <div>
-            <label>Quantity:</label>
-            <input type="number" name="quantity" value="<?php echo $medicine['quantity']; ?>" required>
-        </div>
+    <div class="form-group">
+        <label>Quantity:</label>
+        <input type="number" name="quantity" value="<?php echo $medicine['quantity']; ?>" required>
+    </div>
 
-        <div>
-            <input type="submit" value="Update Medicine">
-        </div>
-    </form>
+    <div>
+        <input type="submit" value="Update Medicine">
+    </div>
+</form>
+
+<a href="view_medicine.php">Back to List</a>
 </body>
 </html>
 
-<?php pg_close($conn); ?>
+<?php mysqli_close($conn); ?>

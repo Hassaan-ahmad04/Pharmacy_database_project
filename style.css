@@ -1,31 +1,46 @@
-/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
 
-/* Form container */
+h2 {
+    margin-bottom: 15px;
+}
+
 form {
     width: 300px;
 }
 
-/* Each input field container */
-form div {
-    margin-bottom: 25px;
+.form-group {
+    margin-bottom: 15px;
 }
 
-/* Labels styling */
-form label {
+label {
     display: inline-block;
     width: 100px;
 }
 
-/* Input boxes styling */
-form input[type="text"],
-form input[type="number"] {
+input[type="text"], input[type="number"], select {
     width: 180px;
-    padding: 2px 5px; /* thoda padding for better look */
+    padding: 5px;
 }
 
-/* Submit button styling */
-form input[type="submit"] {
+input[type="submit"] {
     padding: 5px 15px;
     cursor: pointer;
-    hover {background-color: #45a049}
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
 }

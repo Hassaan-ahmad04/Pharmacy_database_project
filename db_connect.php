@@ -1,15 +1,12 @@
 <?php
 $host = "localhost";
-$port = "5432";
-$dbname = "pharmacydb";
-$user = "postgres";
-$password = "your_password_here";
+$dbname = "pharmacy_db"; // MySQL database name
+$user = "root";           // your MySQL username
+$pass = "";               // your MySQL password
 
-$conn = pg_connect("host=localhost port=5432 dbname=Pharmacy_DB user=postgres password=12345");
+$conn = mysqli_connect($host, $user, $pass, $dbname);
 
 if (!$conn) {
-    die("❌ Connection failed: " . pg_last_error());
-} else {
-    echo "✅ Connected successfully to PostgreSQL!";
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>

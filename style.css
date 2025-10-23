@@ -1,0 +1,31 @@
+/* style.css */
+
+/* Form container */
+form {
+    width: 300px;
+}
+
+/* Each input field container */
+form div {
+    margin-bottom: 25px;
+}
+
+/* Labels styling */
+form label {
+    display: inline-block;
+    width: 100px;
+}
+
+/* Input boxes styling */
+form input[type="text"],
+form input[type="number"] {
+    width: 180px;
+    padding: 2px 5px; /* thoda padding for better look */
+}
+
+/* Submit button styling */
+form input[type="submit"] {
+    padding: 5px 15px;
+    cursor: pointer;
+    hover {background-color: #45a049}
+}

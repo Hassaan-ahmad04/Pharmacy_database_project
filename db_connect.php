@@ -1,12 +1,13 @@
 <?php
-$host = "localhost";
-$dbname = "pharmacy_db"; // MySQL database name
-$user = "root";           // your MySQL username
-$pass = "";               // your MySQL password
+$host = getenv('DB_HOST');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
+$dbname = getenv('DB_NAME');
+$port = getenv('DB_PORT');
 
-$conn = mysqli_connect($host, $user, $pass, $dbname);
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("❌ Connection failed: " . $conn->connect_error);
 }
 ?>

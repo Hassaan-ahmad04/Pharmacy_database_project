@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity = $_POST['quantity'] ?? "";
 
     if ($medicine_name && $price && $quantity) {
-        $query = "INSERT INTO medicine (medicine_name, price, quantity) 
+        $query = "INSERT INTO medicine (name, price, quantity) 
                   VALUES ('$medicine_name', $price, $quantity)";
         $result = mysqli_query($conn, $query);
 

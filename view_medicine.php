@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 include 'db_connect.php';
 
-$result = mysqli_query($conn, "SELECT * FROM medicine ORDER BY medicine_id");
+$result = mysqli_query($conn, "SELECT * FROM medicine ORDER BY id");
 
 ?>
 

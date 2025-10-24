@@ -27,13 +27,13 @@ $result = mysqli_query($conn, "SELECT * FROM medicine ORDER BY id");
     </tr>
     <?php while($row = mysqli_fetch_assoc($result)) { ?>
     <tr>
-        <td><?php echo $row['medicine_id']; ?></td>
-        <td><?php echo $row['medicine_name']; ?></td>
+        <td><?php echo $row['id']; ?></td>
+        <td><?php echo $row['name']; ?></td>
         <td><?php echo $row['price']; ?></td>
         <td><?php echo $row['quantity']; ?></td>
         <td>
-            <a href="update_medicine.php?id=<?php echo $row['medicine_id']; ?>">Edit</a> |
-            <a href="delete_medicine.php?id=<?php echo $row['medicine_id']; ?>" 
+            <a href="update_medicine.php?id=<?php echo $row['id']; ?>">Edit</a> |
+            <a href="delete_medicine.php?id=<?php echo $row['id']; ?>" 
                onclick="return confirm('Are you sure?')">Delete</a>
         </td>
     </tr>

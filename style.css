@@ -1,46 +1,126 @@
+/* --- 1. Basic Setup & Body --- */
+/* Reset default styles and set a clean font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6; /* A light, soft grey background */
+    color: #333;
+    line-height: 1.6;
+    /* Center the container on the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-h2 {
-    margin-bottom: 15px;
+/* --- 2. Main Layout Container --- */
+.container {
+    width: 100%;
+    max-width: 900px; /* The max width of our layout */
+    margin: 0 auto;
+    background: #ffffff; /* A clean white background for the content */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* A subtle shadow for depth */
+    overflow: hidden; /* Keeps the rounded corners */
 }
 
-form {
-    width: 300px;
+/* --- 3. Header --- */
+header {
+    background: #0056b3; /* A professional blue */
+    color: white;
+    padding: 30px;
+    text-align: center;
 }
 
-.form-group {
-    margin-bottom: 15px;
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
 }
 
-label {
-    display: inline-block;
-    width: 100px;
+/* --- 4. Main Content Grid --- */
+main {
+    padding: 30px;
+    display: grid;
+    /* This creates a 2-column grid on desktop */
+    grid-template-columns: 1fr 1fr;
+    gap: 30px; /* Space between the grid items */
 }
 
-input[type="text"], input[type="number"], select {
-    width: 180px;
-    padding: 5px;
+/* --- 5. Module Cards --- */
+.module {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    background: #fafafa;
 }
 
-input[type="submit"] {
-    padding: 5px 15px;
-    cursor: pointer;
+.module h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #0056b3;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
 }
 
-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* --- 6. Buttons --- */
+.btn {
+    display: block; /* Make buttons full-width within their container */
+    text-decoration: none;
+    background-color: #28a745; /* A nice, vibrant green */
+    color: white;
+    padding: 12px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-table, th, td {
-    border: 1px solid black;
+.btn:last-child {
+    margin-bottom: 0;
 }
 
-th, td {
-    padding: 8px;
-    text-align: left;
+/* Hover effect for buttons */
+.btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* A slight "lift" effect */
+}
+
+/* A secondary button style (for 'View') */
+.btn.btn-secondary {
+    background-color: #6c757d; /* A neutral grey */
+}
+
+.btn.btn-secondary:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+/* --- 7. Responsiveness (For Page Size) --- */
+
+/* This is a Media Query. 
+   On screens 768px wide or less (like tablets and phones), 
+   these styles will apply.
+*/
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem; /* Smaller title on mobile */
+    }
+    
+    main {
+        /* Stack the grid items into 1 column */
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .module h2 {
+        font-size: 1.4rem;
+    }
 }
